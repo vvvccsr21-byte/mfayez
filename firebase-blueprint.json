@@ -1,0 +1,86 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile with role, permissions, and commission rate",
+      "type": "object",
+      "properties": {
+        "username": { "type": "string", "description": "Unique username" },
+        "name": { "type": "string", "description": "Display name" },
+        "email": { "type": "string", "format": "email", "description": "User email address" },
+        "role": { "type": "string", "enum": ["admin", "sales"], "description": "System role" },
+        "rate": { "type": "number", "description": "Commission percentage rate" },
+        "verified": { "type": "boolean", "description": "Whether the user has a verified badge" },
+        "permissions": { "type": "object", "description": "Dictionary of specific user permissions" },
+        "createdAt": { "type": "string", "description": "Account creation timestamp" }
+      },
+      "required": ["username", "name", "role"]
+    },
+    "Client": {
+      "title": "Client",
+      "description": "Customer information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique client code" },
+        "name": { "type": "string", "description": "Client full name" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "address": { "type": "string", "description": "Client address" },
+        "notes": { "type": "string", "description": "Additional notes" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["id", "name", "phone"]
+    },
+    "Product": {
+      "title": "Product",
+      "description": "Inventory product item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique product code" },
+        "name": { "type": "string", "description": "Product title" },
+        "price": { "type": "number", "description": "Selling price" },
+        "cost": { "type": "number", "description": "Wholesale cost" },
+        "stock": { "type": "number", "description": "Stock count on hand" },
+        "notes": { "type": "string", "description": "Item notes" },
+        "createdBy": { "type": "string", "description": "Author user" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      },
+      "required": ["id", "name", "price", "stock"]
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "Sales invoice order",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique invoice code" },
+        "date": { "type": "string", "description": "Invoice date YYYY-MM-DD" },
+        "clientId": { "type": "string", "description": "Referenced client ID" },
+        "seller": { "type": "string", "description": "Sales rep name" },
+        "status": { "type": "string", "enum": ["مفتوحة", "مغلقة"], "description": "Order state" },
+        "paymentMethod": { "type": "string", "enum": ["نقدي", "آجل"], "description": "Payment type" },
+        "notes": { "type": "string", "description": "Invoice notes" },
+        "items": { "type": "array", "description": "List of purchased items" },
+        "totalAmount": { "type": "number", "description": "Grand total in EGP" },
+        "createdAt": { "type": "string", "description": "Invoice timestamp" }
+      },
+      "required": ["id", "date", "clientId", "seller", "status", "paymentMethod", "totalAmount"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "System users and sales staff permissions"
+    },
+    "/clients/{clientId}": {
+      "schema": "Client",
+      "description": "Client records and profiles"
+    },
+    "/products/{productId}": {
+      "schema": "Product",
+      "description": "Inventory catalog and stock"
+    },
+    "/invoices/{invoiceId}": {
+      "schema": "Invoice",
+      "description": "All customer sale invoices"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "منظومة إدارة المبيعات والفواتير الحديثة",
+  "description": "نظام احترافي سحابي متكامل لإدارة المبيعات، الفواتير، العملاء، المخزون، حسابات البائعات، والعمولات والأرباح مع قاعدة بيانات سحابية متقدمة.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
